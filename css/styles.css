@@ -5555,3 +5555,303 @@ td:last-child {
     text-align: center;
   }
 }
+
+/* ===================================================================
+ * # PIXEL PARADE
+ * ------------------------------------------------------------------- */
+.s-intro {
+  overflow: hidden;
+}
+
+.s-intro__content {
+  z-index: 2;
+}
+
+.s-intro__content-lead {
+  max-width: 58rem;
+  font-size: var(--text-md);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 0;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+}
+
+.pixel-parade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.pixel-parade::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 28%, rgba(255, 210, 115, 0.16), transparent 14rem),
+    radial-gradient(circle at 82% 18%, rgba(100, 215, 198, 0.16), transparent 12rem),
+    radial-gradient(circle at 24% 78%, rgba(151, 179, 74, 0.14), transparent 14rem);
+}
+
+.pixel-parade__caption {
+  --pixel-caption-shift: 0;
+  position: absolute;
+  top: 16%;
+  left: 10%;
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 1.6rem;
+  border: 2px solid #24361d;
+  background: rgba(255, 248, 223, 0.92);
+  box-shadow: 0.7rem 0.7rem 0 rgba(36, 54, 29, 0.18);
+  color: #24361d;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.28rem;
+  text-transform: uppercase;
+  animation: pixelCaptionFloat 4s ease-in-out infinite;
+}
+
+.pixel-parade__sprite {
+  position: absolute;
+  filter: drop-shadow(0 1.2rem 2.4rem rgba(0, 0, 0, 0.24));
+}
+
+.pixel-parade__sprite::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -1.6rem;
+  width: 62%;
+  height: 1.2rem;
+  background: rgba(16, 16, 16, 0.18);
+  border-radius: 999px;
+  transform: translateX(-50%);
+  animation: pixelShadowPulse 4s ease-in-out infinite;
+}
+
+.pixel-parade__art {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pixel-parade__sprite--footballer {
+  top: 12%;
+  right: 14%;
+  width: 10.8rem;
+  animation: pixelFloatOne 5.8s ease-in-out infinite;
+}
+
+.pixel-parade__sprite--vietnam {
+  top: 22%;
+  left: 16%;
+  width: 7.2rem;
+  animation: pixelFloatThree 5.2s ease-in-out infinite;
+}
+
+.pixel-parade__sprite--cat {
+  top: 31%;
+  right: 25%;
+  width: 9.8rem;
+  animation: pixelFloatTwo 4.8s ease-in-out infinite;
+}
+
+.pixel-parade__sprite--flag {
+  left: 11%;
+  bottom: 14%;
+  width: 11.4rem;
+  animation: pixelFlagWave 6.4s ease-in-out infinite;
+}
+
+.pixel-parade__sprite--royal-badge {
+  right: 18%;
+  bottom: 11%;
+  width: 8rem;
+  animation: pixelBadgeBob 5.6s ease-in-out infinite;
+}
+
+@keyframes pixelFloatOne {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(0.4rem, -1.2rem, 0) rotate(3deg);
+  }
+}
+
+@keyframes pixelFloatTwo {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(-0.6rem, -1.6rem, 0) rotate(-3deg);
+  }
+}
+
+@keyframes pixelFloatThree {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  40% {
+    transform: translate3d(0.6rem, -1rem, 0);
+  }
+
+  70% {
+    transform: translate3d(-0.2rem, -0.4rem, 0);
+  }
+}
+
+@keyframes pixelFlagWave {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  25% {
+    transform: translate3d(0.4rem, -0.6rem, 0) rotate(1.5deg);
+  }
+
+  70% {
+    transform: translate3d(-0.3rem, 0.2rem, 0) rotate(-1deg);
+  }
+}
+
+@keyframes pixelBadgeBob {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(0, -0.9rem, 0) rotate(2deg);
+  }
+}
+
+@keyframes pixelCaptionFloat {
+  0%,
+  100% {
+    transform: translate(var(--pixel-caption-shift), 0);
+  }
+
+  50% {
+    transform: translate(var(--pixel-caption-shift), -0.8rem);
+  }
+}
+
+@keyframes pixelShadowPulse {
+  0%,
+  100% {
+    transform: translateX(-50%) scaleX(1);
+    opacity: 0.24;
+  }
+
+  50% {
+    transform: translateX(-50%) scaleX(0.82);
+    opacity: 0.14;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .s-intro__content-lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pixel-parade__caption {
+    --pixel-caption-shift: -50%;
+    top: 11rem;
+    left: 50%;
+  }
+
+  .pixel-parade__sprite--footballer {
+    right: 6%;
+    top: 16%;
+    width: 9.6rem;
+  }
+
+  .pixel-parade__sprite--vietnam {
+    left: 10%;
+    top: 21%;
+    width: 6.6rem;
+  }
+
+  .pixel-parade__sprite--cat {
+    top: auto;
+    right: 8%;
+    bottom: 22%;
+  }
+
+  .pixel-parade__sprite--flag {
+    left: 5%;
+    bottom: 18%;
+  }
+
+  .pixel-parade__sprite--royal-badge {
+    right: 10%;
+    bottom: 15%;
+    width: 7.2rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .s-intro__content-lead {
+    font-size: 1.7rem;
+  }
+
+  .pixel-parade {
+    opacity: 0.88;
+  }
+
+  .pixel-parade__caption {
+    top: 9.4rem;
+    padding: 0.8rem 1.1rem;
+    font-size: 1rem;
+    letter-spacing: 0.18rem;
+    box-shadow: 0.4rem 0.4rem 0 rgba(36, 54, 29, 0.18);
+  }
+
+  .pixel-parade__sprite--footballer {
+    width: 7.8rem;
+    top: 15%;
+    right: 4%;
+  }
+
+  .pixel-parade__sprite--vietnam {
+    width: 5.4rem;
+    top: 20%;
+    left: 4%;
+  }
+
+  .pixel-parade__sprite--cat {
+    width: 7.6rem;
+    right: 4%;
+    bottom: 24%;
+  }
+
+  .pixel-parade__sprite--flag {
+    width: 9.2rem;
+    left: 3%;
+    bottom: 14%;
+  }
+
+  .pixel-parade__sprite--royal-badge {
+    width: 5.8rem;
+    right: 4%;
+    bottom: 16%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixel-parade__caption,
+  .pixel-parade__sprite,
+  .pixel-parade__sprite::after {
+    animation: none !important;
+  }
+}
