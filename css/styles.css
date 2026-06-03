@@ -360,6 +360,7 @@ h1 span {
   line-height: 1.45;
 }
 
+
 /* ID Card inspired by the uploaded reference image
    ========================================================================== */
 .id-card-wrap {
@@ -476,6 +477,43 @@ h1 span {
   font-size: 2rem;
   font-weight: 800;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.clock-core {
+  padding: 14px 10px;
+  align-content: center;
+  gap: 5px;
+  text-align: center;
+  color: var(--text);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -12px 24px rgba(0, 0, 0, 0.24);
+}
+
+.clock-label,
+.clock-meta {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.clock-label {
+  color: var(--matcha);
+}
+
+.clock-time {
+  display: block;
+  font-size: 1.48rem;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+}
+
+.clock-meta {
+  color: var(--muted);
+  letter-spacing: 0.11em;
 }
 
 .card-kicker {
@@ -988,6 +1026,20 @@ h1 span {
   .avatar-core {
     width: 92px;
     height: 92px;
+  }
+
+  .clock-core {
+    padding: 12px 8px;
+    gap: 4px;
+  }
+
+  .clock-label,
+  .clock-meta {
+    font-size: 0.54rem;
+  }
+
+  .clock-time {
+    font-size: 1.18rem;
   }
 
   .social-row a {

@@ -295,13 +295,16 @@
               <article class="id-card">
                 <div class="card-shine" aria-hidden="true"></div>
                 <div class="id-card-topline">
-                  <span></span>
+                  <span>Premium</span>
                   <span class="status-pill">Available</span>
                 </div>
 
                 <div class="profile-zone">
-                  <div class="avatar-orbit" aria-hidden="true">
-                    <div class="avatar-core"></div>
+                  <div class="clock-orbit" data-vn-clock aria-label="Đồng hồ hiện tại theo giờ Việt Nam">
+                    <div class="clock-core">
+                      <span class="clock-time" data-vn-clock-time>00:00:00</span>
+                      <span class="clock-meta" data-vn-clock-meta>UTC+7</span>
+                    </div>
                   </div>
                   <div>
                     <!-- <p class="card-kicker">AI / Cloud / Notes</p> -->
@@ -313,7 +316,7 @@
                 </div>
 
                 <div class="social-row" aria-label="Các nền tảng yêu thích">
-                  <a href="https://www.facebook.com/hoang.con.393113/" target="_blank" rel="noreferrer">Fb</a>
+                  <a href="https://www.facebook.com/hoang.con.393113/" target="_blank" rel="noreferrer">FB</a>
                   <a href="https://blog-cua-hoang.hashnode.dev/" target="_blank" rel="noreferrer">Blog</a>
                   <a href="#notes">Music</a>
                   <a href="#work">AWS</a>
@@ -408,7 +411,7 @@
           <div class="container">
             <div class="center-heading reveal">
               <!-- <p class="eyebrow">Tôi đang học và làm</p> -->
-              <h2 id="work-title">Những thứ mình đang học.</h2>
+              <h2 id="work-title">Thứ mình đang học.</h2>
               <p>
                 Đây không phải danh sách để khoe kỹ năng. Nó chỉ là bản đồ nhỏ cho những gì mình đang dành thời gian tìm hiểu.
               </p>
@@ -541,6 +544,9 @@
       <script>
         const navToggle = document.querySelector('[data-nav-toggle]');
         const nav = document.querySelector('[data-nav]');
+        const vnClock = document.querySelector('[data-vn-clock]');
+        const vnClockTime = document.querySelector('[data-vn-clock-time]');
+        const vnClockMeta = document.querySelector('[data-vn-clock-meta]');
 
         navToggle.addEventListener('click', () => {
           const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
@@ -556,6 +562,39 @@
             document.body.classList.remove('nav-open');
           });
         });
+
+        if (vnClock && vnClockTime && vnClockMeta) {
+          const vnTimeFormatter = new Intl.DateTimeFormat('vi-VN', {
+            timeZone: 'Asia/Ho_Chi_Minh',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
+          });
+
+          const vnDateFormatter = new Intl.DateTimeFormat('vi-VN', {
+            timeZone: 'Asia/Ho_Chi_Minh',
+            weekday: 'short',
+            day: '2-digit',
+            month: '2-digit',
+          });
+
+          const updateVietnamClock = () => {
+            const now = new Date();
+            const timeText = vnTimeFormatter.format(now);
+            const dateText = vnDateFormatter.format(now).replace(',', '');
+
+            vnClockTime.textContent = timeText;
+            vnClockMeta.textContent = `${dateText} · UTC+7`;
+            vnClock.setAttribute(
+              'aria-label',
+              `Giờ hiện tại ở Việt Nam là ${timeText}, ${dateText}, UTC cộng 7`
+            );
+          };
+
+          updateVietnamClock();
+          window.setInterval(updateVietnamClock, 1000);
+        }
       </script>
     </body>
   </html>
