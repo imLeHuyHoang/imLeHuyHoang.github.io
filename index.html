@@ -1,576 +1,561 @@
   <!DOCTYPE html>
-  <html lang="en" class="no-js">
+  <html lang="vi">
     <head>
-      <!--- basic page needs
-      ================================================== -->
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>Le Huy Hoang</title>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+      <meta
+        name="description"
+        content="Portfolio cá nhân của Lê Huy Hoàng - Cloud, AWS, Terraform và những ghi chú học tập bằng tiếng Việt."
+      />
+      <title>Hoang Con</title>
 
-      <script>
-        document.documentElement.classList.remove("no-js");
-        document.documentElement.classList.add("js");
-      </script>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,650&display=swap"
+        rel="stylesheet"
+      />
 
-      <!-- CSS
-      ================================================== -->
       <link rel="stylesheet" href="css/vendor.css" />
       <link rel="stylesheet" href="css/styles.css" />
 
+      <style>
+        /* Extra styles for the updated icon cards and YouTube music board. */
+        .soft-card {
+          position: relative;
+          overflow: hidden;
+        }
 
+        .soft-card::after {
+          content: "";
+          position: absolute;
+          inset: auto -20% -45% 20%;
+          height: 8rem;
+          background: radial-gradient(circle, rgba(189, 214, 160, 0.22), transparent 68%);
+          pointer-events: none;
+        }
+
+        .soft-card-icon.brand-icon {
+          width: 4.7rem;
+          height: 4.7rem;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 1.45rem;
+          margin-bottom: 1.2rem;
+          border: 1px solid rgba(229, 214, 183, 0.34);
+          background:
+            linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03)),
+            rgba(33, 42, 33, 0.7);
+          box-shadow:
+            0 1.2rem 2.4rem rgba(0, 0, 0, 0.22),
+            inset 0 0 0.8rem rgba(255, 255, 255, 0.05);
+        }
+
+        .soft-card-icon.brand-icon img {
+          width: 2.55rem;
+          height: 2.55rem;
+          object-fit: contain;
+          display: block;
+          filter: drop-shadow(0 0.45rem 0.9rem rgba(0, 0, 0, 0.25));
+        }
+
+        .soft-card-icon.brand-icon--aws img {
+          width: 3rem;
+          height: 3rem;
+        }
+
+        .soft-card-icon.brand-icon--markdown img {
+          width: 2.75rem;
+          height: 2.75rem;
+        }
+
+        .music-board {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 1.2rem;
+        }
+
+        .music-card {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          min-height: 100%;
+          overflow: hidden;
+          border-radius: 1.7rem;
+          text-decoration: none;
+          color: inherit;
+          border: 1px solid rgba(229, 214, 183, 0.18);
+          background:
+            linear-gradient(180deg, rgba(242, 226, 190, 0.1), rgba(150, 170, 122, 0.06)),
+            rgba(19, 25, 19, 0.72);
+          box-shadow: 0 1.6rem 3rem rgba(0, 0, 0, 0.26);
+          backdrop-filter: blur(18px);
+          transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+        }
+
+        .music-card:hover {
+          transform: translateY(-0.45rem);
+          border-color: rgba(189, 214, 160, 0.55);
+          box-shadow:
+            0 1.9rem 3.8rem rgba(0, 0, 0, 0.34),
+            0 0 0 1px rgba(189, 214, 160, 0.12),
+            0 0 2.2rem rgba(189, 214, 160, 0.16);
+        }
+
+        .music-thumb {
+          position: relative;
+          aspect-ratio: 16 / 9;
+          overflow: hidden;
+          background: rgba(0, 0, 0, 0.28);
+        }
+
+        .music-thumb img {
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
+          transition: transform 420ms ease, filter 420ms ease;
+        }
+
+        .music-card:hover .music-thumb img {
+          transform: scale(1.06);
+          filter: saturate(1.08) contrast(1.02);
+        }
+
+        .music-thumb::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background:
+            linear-gradient(180deg, transparent 40%, rgba(13, 17, 13, 0.72)),
+            radial-gradient(circle at 28% 22%, rgba(255, 240, 202, 0.2), transparent 35%);
+          pointer-events: none;
+        }
+
+        .play-button {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          z-index: 1;
+          width: 3.5rem;
+          height: 3.5rem;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 999px;
+          transform: translate(-50%, -50%);
+          color: #172117;
+          background: rgba(233, 220, 184, 0.92);
+          box-shadow: 0 0 2.2rem rgba(233, 220, 184, 0.32);
+          font-size: 1.05rem;
+        }
+
+        .music-body {
+          position: relative;
+          z-index: 1;
+          padding: 1.15rem 1.15rem 1.25rem;
+        }
+
+        .music-body h3 {
+          margin: 0 0 0.55rem;
+          font-size: clamp(1rem, 1vw + 0.85rem, 1.18rem);
+          line-height: 1.35;
+        }
+
+        .music-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          max-width: 100%;
+          color: rgba(232, 222, 198, 0.7);
+          font-size: 0.82rem;
+          line-height: 1.45;
+          word-break: break-all;
+        }
+
+        .music-link::before {
+          content: "↗";
+          flex: 0 0 auto;
+          color: rgba(189, 214, 160, 0.9);
+        }
+
+        @media (max-width: 900px) {
+          .music-board {
+            grid-template-columns: 1fr;
+          }
+
+          .music-card {
+            display: grid;
+            grid-template-columns: 38% 1fr;
+            align-items: stretch;
+          }
+
+          .music-thumb {
+            min-height: 100%;
+            aspect-ratio: auto;
+          }
+        }
+
+        @media (max-width: 560px) {
+          .soft-card-icon.brand-icon {
+            width: 4.2rem;
+            height: 4.2rem;
+            border-radius: 1.25rem;
+          }
+
+          .music-card {
+            display: flex;
+          }
+
+          .music-thumb {
+            aspect-ratio: 16 / 9;
+          }
+        }
+      </style>
     </head>
 
-    <body id="top">
-      <!-- preloader
-      ================================================== -->
-      <div id="preloader">
-        <div id="loader" class="dots-fade">
-          <div></div>
-          <div></div>
-          <div></div>
+    <body>
+      <a class="skip-link" href="#main">Bỏ qua menu</a>
+
+      <header class="site-header" data-header>
+        <div class="container header-inner">
+          <a class="brand" href="#top" aria-label="Về đầu trang">
+            <!-- <span class="brand-mark">Hoang Con</span> -->
+            <span class="brand-text">Hoang Con</span>
+          </a>
+
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-label="Mở menu điều hướng"
+            aria-expanded="false"
+            aria-controls="site-nav"
+            data-nav-toggle
+          >
+            <span></span>
+            <span></span>
+          </button>
+
+          <nav class="site-nav" id="site-nav" data-nav>
+            <a href="#about">Giới thiệu</a>
+            <a href="#work">Mình đang học</a>
+            <a href="#notes">Âm nhạc</a>
+            <a href="#contact">Liên hệ</a>
+          </nav>
         </div>
-      </div>
+      </header>
 
-      <!-- page wrap
-      ================================================== -->
-      <div id="page" class="s-pagewrap ss-home">
-        <!-- # site header 
-          ================================================== -->
-        <header class="s-header">
-          <div class="row s-header__inner width-sixteen-col">
-            <div class="s-header__block">
+      <main id="main">
+        <section class="hero section" id="top" aria-labelledby="hero-title">
+          <div class="ambient ambient-one" aria-hidden="true"></div>
+          <div class="ambient ambient-two" aria-hidden="true"></div>
 
-              <a class="s-header__menu-toggle" href="#0"><span>Menu</span></a>
+          <div class="container hero-grid">
+            <div class="hero-copy reveal">
+              <p class="eyebrow"></p>
+              <h1 id="hero-title">
+                Xin chào, mình là
+                <span>Hoàng Con</span>
+              </h1>
+              <p class="hero-lead">
+                Một người luôn có nhiều câu hỏi trong đầu và hay nhớ về những kỉ niệm cũ.
+                Mình đang đi từng bước trong mảng Cloud và ghi lại những điều mình học được qua blog.
+              </p>
+
+              <div class="hero-actions" aria-label="Liên kết nhanh">
+                <a class="button button-primary" href="#about">Đọc thêm về mình</a>
+                <a
+                  class="button button-ghost"
+                  href="https://blog-cua-hoang.hashnode.dev/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Mở blog
+                </a>
+              </div>
+
+              <dl class="quick-facts" aria-label="Thông tin ngắn">
+                <!-- <div>
+                  <dt>Người ở đâu?</dt>
+                  <dd>1</dd>
+                </div> -->
+                <div>
+                  <dt>Hướng đi</dt>
+                  <dd>Cloud · AWS · Terraform</dd>
+                </div>
+                <div>
+                  <dt>Tinh thần</dt>
+                  <dd>Chậm rãi, thật thà, cầu tiến</dd>
+                </div>
+              </dl>
             </div>
-            <!-- end s-header__block -->
 
-            <nav class="s-header__nav">
-              <ul class="s-header__menu-links">
-                <li>
-                  <a href="https://www.linkedin.com" target="_blank">
-                    <div class="circle-icon">
-                      <i class="fab fa-linkedin"></i>
-                    </div>
-                    <span>LinkedIn</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.facebook.com/hoang.con.393113/" target="_blank">
-                    <div class="circle-icon">
-                      <i class="fab fa-facebook"></i>
-                    </div>
-                    <span>Facebook</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://github.com/imLeHuyHoang" target="_blank">
-                    <div class="circle-icon">
-                      <i class="fab fa-github"></i>
-                    </div>
-                    <span>GitHub</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://blog-cua-hoang.hashnode.dev/" target="_blank">
-                    <div class="circle-icon">
-                      <i class="fas fa-blog"></i>
-                    </div>
-                    <span>Blog</span>
-                  </a>
-                </li>
-              </ul>
-              <!-- s-header__menu-links -->
+            <div class="id-card-wrap reveal reveal-delay-1" aria-label="Thẻ portfolio minh họa">
+              <article class="id-card">
+                <div class="card-shine" aria-hidden="true"></div>
+                <div class="id-card-topline">
+                  <span></span>
+                  <span class="status-pill">Available</span>
+                </div>
 
-              <!-- s-header__contact -->
-            </nav>
-            <!-- end s-header__nav -->
+                <div class="profile-zone">
+                  <div class="avatar-orbit" aria-hidden="true">
+                    <div class="avatar-core"></div>
+                  </div>
+                  <div>
+                    <!-- <p class="card-kicker">AI / Cloud / Notes</p> -->
+                    <h2>Hoàng Con</h2>
+                    <p>
+                      Một góc nhỏ để lưu lại hành trình học, làm và trưởng thành trong nghề.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="social-row" aria-label="Các nền tảng yêu thích">
+                  <a href="https://www.facebook.com/hoang.con.393113/" target="_blank" rel="noreferrer">Fb</a>
+                  <a href="https://blog-cua-hoang.hashnode.dev/" target="_blank" rel="noreferrer">Blog</a>
+                  <a href="#notes">Music</a>
+                  <a href="#work">AWS</a>
+                  <a href="#contact">Mail</a>
+                </div>
+
+                <div class="card-copy">
+                  <p>
+                    Không cố làm mọi thứ thật lớn. Mình muốn làm tốt những điều nhỏ bé.
+                  </p>
+                </div>
+
+                <div class="card-bottom">
+                  <div class="qr-box" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                  </div>
+                  <div class="mini-tags" aria-label="Từ khóa">
+                    <span>Cloud</span>
+                    <span>Terraform</span>
+                    <span>Linux</span>
+                    <span>Writing</span>
+                  </div>
+                </div>
+              </article>
+            </div>
           </div>
-          <!-- end s-header__inner -->
-        </header>
-        <!-- end s-header -->
+        </section>
 
-        <!-- # site main content
-          ================================================== -->
-        <section id="content" class="s-content">
-          <!-- intro
-              ----------------------------------------------- -->
-          <section id="intro" class="s-intro">
-            <div class="pixel-parade" aria-hidden="true">
-              <!-- <span class="pixel-parade__caption">pixel crew online</span> -->
-
-              <div class="pixel-parade__sprite pixel-parade__sprite--footballer">
-                <svg
-                  class="pixel-parade__art"
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                  shape-rendering="crispEdges"
-                >
-                  <g fill="#221915">
-                    <rect x="5" y="1" width="5" height="1" />
-                    <rect x="4" y="2" width="6" height="1" />
-                    <rect x="4" y="3" width="1" height="1" />
-                    <rect x="10" y="3" width="1" height="1" />
-                    <rect x="4" y="4" width="7" height="1" />
-                    <rect x="6" y="11" width="1" height="3" />
-                    <rect x="9" y="11" width="1" height="3" />
-                    <rect x="5" y="14" width="2" height="1" />
-                    <rect x="9" y="14" width="2" height="1" />
-                    <rect x="2" y="7" width="1" height="3" />
-                    <rect x="12" y="7" width="1" height="3" />
-                  </g>
-                  <g fill="#d9a07d">
-                    <rect x="5" y="3" width="5" height="3" />
-                    <rect x="3" y="7" width="1" height="2" />
-                    <rect x="11" y="7" width="1" height="2" />
-                  </g>
-                  <g fill="#b10f1d">
-                    <rect x="4" y="6" width="7" height="5" />
-                    <rect x="3" y="6" width="1" height="1" />
-                    <rect x="11" y="6" width="1" height="1" />
-                    <rect x="4" y="11" width="2" height="1" />
-                    <rect x="10" y="11" width="2" height="1" />
-                  </g>
-                  <g fill="#245a33">
-                    <rect x="6" y="11" width="4" height="1" />
-                  </g>
-                  <g fill="#f4f0e6">
-                    <rect x="6" y="12" width="1" height="2" />
-                    <rect x="9" y="12" width="1" height="2" />
-                    <rect x="2" y="10" width="1" height="1" />
-                    <rect x="12" y="10" width="1" height="1" />
-                  </g>
-                  <g fill="#f7f2e8">
-                    <rect x="6" y="7" width="3" height="1" />
-                    <rect x="8" y="8" width="1" height="2" />
-                  </g>
-                  <g fill="#efc54d">
-                    <rect x="10" y="5" width="1" height="1" />
-                    <rect x="9" y="8" width="1" height="1" />
-                  </g>
-                </svg>
-              </div>
-
-              <div class="pixel-parade__sprite pixel-parade__sprite--vietnam">
-                <svg
-                  class="pixel-parade__art"
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                  shape-rendering="crispEdges"
-                >
-                  <g fill="#f4ecd9">
-                    <rect x="2" y="2" width="12" height="12" />
-                  </g>
-                  <g fill="#c81f2f">
-                    <rect x="3" y="3" width="10" height="10" />
-                  </g>
-                  <g fill="#f3c64e">
-                    <rect x="8" y="5" width="1" height="5" />
-                    <rect x="6" y="7" width="5" height="1" />
-                    <rect x="6" y="6" width="1" height="1" />
-                    <rect x="10" y="6" width="1" height="1" />
-                    <rect x="7" y="8" width="1" height="1" />
-                    <rect x="9" y="8" width="1" height="1" />
-                    <rect x="7" y="9" width="3" height="1" />
-                  </g>
-                </svg>
-              </div>
-
-              <div class="pixel-parade__sprite pixel-parade__sprite--cat">
-                <svg
-                  class="pixel-parade__art"
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                  shape-rendering="crispEdges"
-                >
-                  <g fill="#2b1f19">
-                    <rect x="4" y="1" width="2" height="2" />
-                    <rect x="10" y="1" width="2" height="2" />
-                    <rect x="3" y="3" width="10" height="1" />
-                    <rect x="2" y="4" width="12" height="4" />
-                    <rect x="3" y="8" width="10" height="1" />
-                    <rect x="4" y="9" width="8" height="3" />
-                    <rect x="12" y="9" width="2" height="1" />
-                    <rect x="13" y="10" width="1" height="2" />
-                    <rect x="4" y="12" width="2" height="1" />
-                    <rect x="10" y="12" width="2" height="1" />
-                  </g>
-                  <g fill="#f2a15f">
-                    <rect x="4" y="3" width="8" height="1" />
-                    <rect x="3" y="4" width="10" height="4" />
-                    <rect x="4" y="8" width="8" height="1" />
-                    <rect x="5" y="9" width="6" height="3" />
-                    <rect x="12" y="10" width="1" height="1" />
-                  </g>
-                  <g fill="#fff0d9">
-                    <rect x="5" y="6" width="5" height="2" />
-                    <rect x="6" y="8" width="3" height="1" />
-                  </g>
-                  <g fill="#2b1f19">
-                    <rect x="5" y="5" width="1" height="1" />
-                    <rect x="9" y="5" width="1" height="1" />
-                  </g>
-                  <g fill="#ef7f8c">
-                    <rect x="4" y="7" width="1" height="1" />
-                    <rect x="10" y="7" width="1" height="1" />
-                  </g>
-                </svg>
-              </div>
-
-              <div class="pixel-parade__sprite pixel-parade__sprite--flag">
-                <svg
-                  class="pixel-parade__art"
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                  shape-rendering="crispEdges"
-                >
-                  <g fill="#2b2b2b">
-                    <rect x="2" y="1" width="1" height="14" />
-                    <rect x="3" y="2" width="1" height="1" />
-                  </g>
-                  <g fill="#0e6b3e">
-                    <rect x="4" y="2" width="3" height="7" />
-                  </g>
-                  <g fill="#bf1725">
-                    <rect x="7" y="2" width="7" height="7" />
-                  </g>
-                  <g fill="#f2c84e">
-                    <rect x="6" y="4" width="2" height="3" />
-                    <rect x="5" y="5" width="1" height="1" />
-                    <rect x="8" y="5" width="1" height="1" />
-                  </g>
-                  <g fill="#f8f2e7">
-                    <rect x="6" y="5" width="2" height="1" />
-                  </g>
-                </svg>
-              </div>
-
-              <div class="pixel-parade__sprite pixel-parade__sprite--royal-badge">
-                <svg
-                  class="pixel-parade__art"
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                  shape-rendering="crispEdges"
-                >
-                  <g fill="#d3a93c">
-                    <rect x="6" y="1" width="4" height="1" />
-                    <rect x="5" y="2" width="1" height="1" />
-                    <rect x="7" y="2" width="1" height="1" />
-                    <rect x="9" y="2" width="1" height="1" />
-                    <rect x="10" y="2" width="1" height="1" />
-                    <rect x="6" y="3" width="4" height="1" />
-                  </g>
-                  <g fill="#f5efdf">
-                    <rect x="4" y="4" width="8" height="8" />
-                  </g>
-                  <g fill="#1d2840">
-                    <rect x="6" y="5" width="4" height="1" />
-                    <rect x="5" y="6" width="6" height="1" />
-                    <rect x="6" y="7" width="4" height="1" />
-                    <rect x="7" y="8" width="2" height="1" />
-                  </g>
-                  <g fill="#d3a93c">
-                    <rect x="5" y="5" width="1" height="1" />
-                    <rect x="10" y="5" width="1" height="1" />
-                    <rect x="4" y="6" width="1" height="4" />
-                    <rect x="11" y="6" width="1" height="4" />
-                    <rect x="5" y="10" width="6" height="1" />
-                  </g>
-                  <g fill="#7b8cc7">
-                    <rect x="8" y="5" width="1" height="5" />
-                    <rect x="6" y="8" width="4" height="1" />
-                  </g>
-                  <g fill="#b21e2b">
-                    <rect x="7" y="2" width="2" height="1" />
-                  </g>
-                </svg>
-              </div>
+        <section class="section about-section" id="about" aria-labelledby="about-title">
+          <div class="container section-grid">
+            <div class="section-heading reveal">
+              <p class="eyebrow">Giới thiệu</p>
+              <h2 id="about-title">Một phần rất ngắn về mình.</h2>
             </div>
 
-            <div class="row s-intro__content width-sixteen-col">
-              <div class="column lg-12 s-intro__content-inner grid-block">
-                <div class="s-intro__content-text">
-                  <div class="s-intro__content-pretitle text-pretitle">
-                    Hello, I'm Hoang Con
-                  </div>
-                  <h1 class="s-intro__content-title">
-                    I'm learning about DevOps and Cloud.
-                  </h1>
-                  <p class="s-intro__content-lead">
-                    I build cloud experiments, write what I learn, and leave a
-                    little pixel chaos around the page.
-                  </p>
-                </div>
-                <!-- s-intro__content-text -->
+            <div class="content-stack reveal reveal-delay-1">
+              <article class="glass-panel large-copy">
+                <p>
+                  Mình là Hoàng, là một người bình thường, thích tìm hiểu và có hàng vạn câu hỏi trong đầu.
+                  Mình thích bóng đá, thích nghe nhạc, thích những chiếc xe bóng loáng.
+                  Hiện tại mình đang có những bước đi đầu tiên trong hành trình tìm hiểu về Cloud.
+                </p>
+                <p>
+                  Mình không nghĩ bản thân là người giỏi. Mình chỉ đang cố học đều hơn mỗi ngày.
+                  Đọc tài liệu, hỏi những phần chưa hiểu, rồi ghi chú lại theo cách dễ hiểu nhất với mình.
+                </p>
+              </article>
 
-                <div class="s-intro__content-media">
-                  <div class="s-intro__content-media-inner">
+              <!-- <div class="value-grid">
+                <article class="soft-card">
+                  <span class="soft-card-icon brand-icon brand-icon--aws" aria-hidden="true">
                     <img
-                      src="images/avatars/hoangconhehe.jpg"
-                      srcset="
-                        images/avatars/hoangconhehe.jpg    1x,
-                        images/avatars/hoangconhehe.jpg 2x
-                      "
+                      src="https://cdn.simpleicons.org/amazonaws/ff9900"
                       alt=""
+                      loading="lazy"
                     />
-                    <div class="lines">
-                      <span></span>
-                    </div>
-                  </div>
-                </div>
-                <!-- s-intro__content-media -->
-
-                <div class="s-intro__scroll-down">
-                  <a href="#about" class="smoothscroll">
-                    <div class="scroll-icon">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        width="36"
-                        height="36"
-                        fill="none"
-                        stroke="#97b34a"
-                        stroke-width="1"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        
-                        <polyline points="7 13 12 18 17 13"></polyline>
-                        <line x1="12" y1="18" x2="12" y2="6"></line>
-                      </svg>
-                    </div>
-                    <span>Scroll for more</span>
-                  </a>
-                </div>
-                <!-- s-intro__scroll-down -->
-              </div>
-              <!-- s-intro__content-inner -->
+                  </span>
+                  <h3>Cloud & Infrastructure</h3> -->
+                  <!-- <p>Quan tâm tới cách một hệ thống được thiết kế, vận hành và migrate lên AWS một cách an toàn.</p> -->
+                <!-- </article>
+                <article class="soft-card">
+                  <span class="soft-card-icon brand-icon brand-icon--terraform" aria-hidden="true">
+                    <img
+                      src="https://cdn.simpleicons.org/terraform/7b42bc"
+                      alt=""
+                      loading="lazy"
+                    />
+                  </span>
+                  <h3>Terraform</h3> -->
+                  <!-- <p>Đang học cách viết module rõ ràng, biết chọn input/output hợp lý thay vì expose mọi thứ.</p> -->
+                <!-- </article>
+                <article class="soft-card">
+                  <span class="soft-card-icon brand-icon brand-icon--markdown" aria-hidden="true">
+                    <img
+                      src="https://cdn.simpleicons.org/markdown/e8dec6"
+                      alt=""
+                      loading="lazy"
+                    />
+                  </span>
+                  <h3>Viết ghi chú</h3> -->
+                  <!-- <p>Thích biến những phần khó hiểu thành ghi chú tiếng Việt ngắn gọn, có ví dụ và dùng lại được.</p> -->
+                <!-- </article> -->
+              <!-- </div> -->
             </div>
-            <!-- s-intro__content -->
-          </section>
-          <!-- end s-intro -->
+          </div>
+        </section>
 
-          <!-- about
-              ----------------------------------------------- -->
-          <section id="about" class="s-about target-section">
-            <div class="row s-about__content width-sixteen-col">
-              <div class="column grid-block grid-section-split">
-                <img
-                  src="images/geometric_shape.svg"
-                  alt=""
-                  class="s-about__content-imgbg"
-                />
-
-                <div class="section-header grid-section-split__header">
-                  <div class="text-pretitle">About Me</div>
-                  <h2 class="text-display-title">
-                    Passionate about cloud infrastructure and automation
-                  </h2>
-                </div>
-                <!-- end section-header -->
-
-                <div class="s-about__content-main grid-section-split__primary">
-                  <p class="attention-getter">
-                    I'm Hoang Con, a DevOps enthusiast focusing on cloud infrastructure, automation, and containerization. Currently building expertise in AWS, Terraform, Docker, and Kubernetes.
-                  </p>
-                  <p class="attention-getter">
-                    I believe in learning by doing - sharing knowledge through technical writing and contributing. Every day is an opportunity to automate something new and make infrastructure more reliable.
-                  </p>
-                  </div>
-                </div>
-                <!-- end s-about__content-main -->
-
-                <!-- end s-about__content-btn -->
-              </div>
-              <!-- content-inner -->
+        <section class="section work-section" id="work" aria-labelledby="work-title">
+          <div class="container">
+            <div class="center-heading reveal">
+              <!-- <p class="eyebrow">Tôi đang học và làm</p> -->
+              <h2 id="work-title">Những thứ mình đang học.</h2>
+              <p>
+                Đây không phải danh sách để khoe kỹ năng. Nó chỉ là bản đồ nhỏ cho những gì mình đang dành thời gian tìm hiểu.
+              </p>
             </div>
-          </section>
-          <!-- end s-about -->
 
-          <!-- my work
-              ----------------------------------------------- -->
-          <section id="mywork" class="s-mywork target-section">
-            <div class="row width-sixteen-col">
-              <div class="column">
-                <div class="section-header" style="text-align: center; margin-bottom: 6rem;">
-                  <div class="text-pretitle">Portfolio</div>
-                  <h2 class="text-display-title">My Work & Contributions</h2>
-                  <p class="lead" style="max-width: 800px; margin: 2rem auto 0;">
-                    Explore my technical projects and writings on cloud infrastructure, DevOps practices, and automation.
-                  </p>
+            <div class="timeline reveal reveal-delay-1">
+              <article class="timeline-item">
+                <span class="timeline-index">01</span>
+                <div>
+                  <h3>AWS migration</h3>
+                  <p>Tìm hiểu cách migration những hệ thống cũ sang AWS.</p>
                 </div>
-
-                <div class="mywork-grid">
-                  
-                  <!-- GitHub Projects Card -->
-                  <div class="work-card">
-                    <div class="work-icon github-icon">
-                      <i class="fab fa-github" style="color: white; font-size: 2.8rem;"></i>
-                    </div>
-                    <h3>Open Source Projects</h3>
-                    <p>
-                      Explore my repositories featuring cloud infrastructure projects, DevOps automation scripts, and hands-on learning implementations.
-                    </p>
-                    <a href="https://github.com/imLeHuyHoang" target="_blank" class="btn">
-                      View GitHub Profile
-                      <i class="fas fa-arrow-right"></i>
-                    </a>
-                  </div>
-
-                  <!-- Technical Blog Card -->
-                  <div class="work-card">
-                    <div class="work-icon blog-icon">
-                      <i class="fas fa-blog" style="color: white; font-size: 2.8rem;"></i>
-                    </div>
-                    <h3>Technical Writing</h3>
-                    <p>
-                      Documenting my DevOps journey through detailed tutorials and guides. Sharing practical knowledge on infrastructure automation and container orchestration.
-                    </p>
-                    <div class="blog-series">
-                      <div class="series-item">
-                        <div class="series-icon"></div>
-                        <div>
-                          <div class="series-title">Terraform Series</div>
-                          <div class="series-desc">Infrastructure as Code tutorials</div>
-                        </div>
-                      </div>
-                      <div class="series-item">
-                        <div class="series-icon"></div>
-                        <div>
-                          <div class="series-title">Docker & K8s Series</div>
-                          <div class="series-desc">Containerization & orchestration guides</div>
-                        </div>
-                      </div>
-                    </div>
-                    <a href="https://blog-cua-hoang.hashnode.dev/" target="_blank" class="btn">
-                      Read Blog Posts
-                      <i class="fas fa-arrow-right"></i>
-                    </a>
-                  </div>
-
+              </article>
+              <article class="timeline-item">
+                <span class="timeline-index">02</span>
+                <div>
+                  <h3>Terraform</h3>
+                  <p>Mình đang học để có thể sử dụng được Terraform.</p>
                 </div>
-                <!-- end mywork-grid -->
-              </div>
+              </article>
+              <article class="timeline-item">
+                <span class="timeline-index">03</span>
+                <div>
+                  <h3>Ghi chép</h3>
+                  <p>Viết lại kiến thức thành bài blog hoặc note ngắn để sau này có thể tra cứu, hoặc có thời gian thì sẽ viết blog.</p>
+                </div>
+              </article>
             </div>
-          </section>
-          <!-- end s-mywork -->
+          </div>
+        </section>
 
-          <section id="expertise" class="s-expertise">
-            <div class="row s-expertise__content width-sixteen-col">
-              <div class="column xl-12 grid-block grid-section-split">
-                <div class="section-header grid-section-split__header">
-                  <div class="text-pretitle">Technical Expertise</div>
-                  <h2 class="text-display-title">
-                    Core competencies and focus areas.
-                  </h2>
-                  <p class="lead">
-                  </p>
-                  <div class="image-techs">
-                  <img
-                    src="images/tech/aws1.png"
-                    alt="icon-aws"
-                    class="s-expertise__content-imgbg"
-                  />
-                  <img
-                    src="images/tech/golang.png"
-                    alt="icon-golang"
-                    class="s-expertise__content-imgbg"
-                  />
-                  <img
-                    src="images/tech/Linux-1024x562.png"
-                    alt="icon-linux"
-                    class="s-expertise__content-imgbg"
-                  />
-                  <img
-                    src="images/tech/terraform-2.jpg"
-                    alt="icon-terraform"
-                    class="s-expertise__content-imgbg"
-                  />
-                  <img
-                    src="images/tech/docker.jpg"
-                    alt="icon-docker"
-                    class="s-expertise__content-imgbg"
-                  />
-                  
-                </div>
-              
-
-                </div>
-                <!-- end section-header -->
-                <div
-                  class="s-expertise__content-main grid-section-split__primary"
-                >
-                  <div class="grid-list-items list-items show-ctr">
-                    <div class="grid-list-items__item list-items__item">
-                      <div class="grid-list-items__title list-items__item-header">
-                        <h3 class="list-items__item-title">
-                          Cloud Infrastructure
-                        </h3>
-                      </div>
-                      <div class="grid-list-items__text list-items__item-text">
-                        <p>
-                          Designing and implementing scalable cloud solutions on AWS. Experience with EC2, S3, Lambda, and other cloud services. Building serverless architectures and managing cloud resources efficiently.
-                        </p>
-                      </div>
-                    </div>
-                    <!-- list-item -->
-                    <div class="grid-list-items__item list-items__item">
-                      <div class="grid-list-items__title list-items__item-header">
-                        <h3 class="list-items__item-title">
-                          Infrastructure as Code
-                        </h3>
-                      </div>
-                      <div class="grid-list-items__text list-items__item-text">
-                        <p>
-                          Using Terraform to automate infrastructure provisioning and management. Writing declarative configurations for reproducible and version-controlled infrastructure deployments.
-                        </p>
-                      </div>
-                    </div>
-                    <!-- list-expertise__item -->
-                    <div class="grid-list-items__item list-items__item">
-                      <div class="grid-list-items__title list-items__item-header">
-                        <h3 class="list-items__item-title">
-                          Container Orchestration
-                        </h3>
-                      </div>
-                      <div class="grid-list-items__text list-items__item-text">
-                        <p>
-                          Working with Docker for containerization and Kubernetes for orchestration. Building containerized applications and managing deployments, scaling, and networking in K8s environments.
-                        </p>
-                      </div>
-                    </div>
-                    <!-- list-expertise__item -->
-                    <div class="grid-list-items__item list-items__item">
-                      <div class="grid-list-items__title list-items__item-header">
-                        <h3 class="list-items__item-title">DevOps & CI/CD</h3>
-                      </div>
-                      <div class="grid-list-items__text list-items__item-text">
-                        <p>
-                          Implementing continuous integration and deployment pipelines. Automating testing, building, and deployment processes to improve development workflow and reduce time-to-production.
-                        </p>
-                      </div>
-                    </div>
-                    <!-- list-expertise__item -->
-                  </div>
-                  <!-- grid-list-items -->
-                </div>
-                <!-- end s-expertise__content-main -->
-
-                <!-- end s-about__content-btn -->
-              </div>
-              <!-- end grid-block-->
+        <section class="section notes-section" id="notes" aria-labelledby="notes-title">
+          <div class="container section-grid reverse">
+            <div class="section-heading reveal">
+              <p class="eyebrow">Góc cá nhân</p>
+              <h2 id="notes-title">Một vài điều nhỏ mình thích.</h2>
+              <span class="section-intro">
+                Mình rất thích nghe nhạc, bên cạnh là 3 bài hát mình rất hay nghe nha.
+              </span>
             </div>
-            <!-- end s-expertise__content -->
-          </section>
-          <!-- end s-expertise -->
 
-        
-      </div>
-      <!-- end page-wrap -->
+            <div class="music-board reveal reveal-delay-1" aria-label="Những bài hát mình yêu thích trên YouTube">
+              <a
+                class="music-card"
+                href="https://www.youtube.com/watch?v=HqPpoGFJzhg"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div class="music-thumb">
+                  <img
+                    src="https://i.ytimg.com/vi/HqPpoGFJzhg/hqdefault.jpg"
+                    alt="Thumbnail YouTube của bài Song Sắt - B Ray"
+                    loading="lazy"
+                  />
+                  <span class="play-button" aria-hidden="true">▶</span>
+                </div>
+                <div class="music-body">
+                  <h3>Song Sắt - B Ray</h3>
+                  <span class="music-link">youtube.com/watch?v=HqPpoGFJzhg</span>
+                </div>
+              </a>
 
-      <!-- Java Script
-      ================================================== -->
-      <script src="js/plugins.js"></script>
-      <script src="js/main.js"></script>
+              <a
+                class="music-card"
+                href="https://www.youtube.com/watch?v=Xn2Lm6AHW6Q&list=RDXn2Lm6AHW6Q&start_radio=1"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div class="music-thumb">
+                  <img
+                    src="https://i.ytimg.com/vi/Xn2Lm6AHW6Q/hqdefault.jpg"
+                    alt="Thumbnail YouTube của bài Cho Em Gần Anh Thêm Chút Nữa"
+                    loading="lazy"
+                  />
+                  <span class="play-button" aria-hidden="true">▶</span>
+                </div>
+                <div class="music-body">
+                  <h3>Cho Em Gần Anh Thêm Chút Nữa</h3>
+                  <span class="music-link">youtube.com/watch?v=Xn2Lm6AHW6Q</span>
+                </div>
+              </a>
+
+              <a
+                class="music-card"
+                href="https://www.youtube.com/watch?v=S6NbybMTPU4&list=RDS6NbybMTPU4&start_radio=1"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div class="music-thumb">
+                  <img
+                    src="https://i.ytimg.com/vi/S6NbybMTPU4/hqdefault.jpg"
+                    alt="Thumbnail YouTube của bài Felina - B Ray"
+                    loading="lazy"
+                  />
+                  <span class="play-button" aria-hidden="true">▶</span>
+                </div>
+                <div class="music-body">
+                  <h3>Felina - B Ray</h3>
+                  <span class="music-link">youtube.com/watch?v=S6NbybMTPU4</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+          <div class="container contact-panel reveal">
+            <div>
+              <!-- <p class="eyebrow">Liên hệ</p> -->
+              <h2 id="contact-title">Cảm ơn bạn đã ghé qua.</h2>
+              <p>
+                Nếu muốn đọc thêm ghi chú kỹ thuật hoặc kết nối với mình, bạn có thể ghé blog hoặc Facebook bên dưới.
+              </p>
+            </div>
+            <div class="contact-actions">
+              <a class="button button-primary" href="https://blog-cua-hoang.hashnode.dev/" target="_blank" rel="noreferrer">Blog cá nhân</a>
+              <a class="button button-ghost" href="https://www.facebook.com/hoang.con.393113/" target="_blank" rel="noreferrer">Facebook</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container footer-inner">
+          <p>© 2026 Lê Huy Hoàng.</p>
+          <a href="#top">Lên đầu trang ↑</a>
+        </div>
+      </footer>
+
+      <script>
+        const navToggle = document.querySelector('[data-nav-toggle]');
+        const nav = document.querySelector('[data-nav]');
+
+        navToggle.addEventListener('click', () => {
+          const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+          navToggle.setAttribute('aria-expanded', String(!isOpen));
+          nav.classList.toggle('is-open');
+          document.body.classList.toggle('nav-open');
+        });
+
+        nav.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            navToggle.setAttribute('aria-expanded', 'false');
+            nav.classList.remove('is-open');
+            document.body.classList.remove('nav-open');
+          });
+        });
+      </script>
     </body>
   </html>
